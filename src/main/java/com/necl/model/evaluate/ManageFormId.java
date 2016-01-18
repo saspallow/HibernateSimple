@@ -5,10 +5,34 @@
  */
 package com.necl.model.evaluate;
 
-/**
- *
- * @author C13.207
- */
-public class ManageFormId {
-    
+import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Embeddable;
+import javax.persistence.ManyToOne;
+
+@Embeddable
+public class ManageFormId implements Serializable {
+
+    private FormEvaluation formManage;
+
+    private ManagerialCompetency manage;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    public FormEvaluation getFormManage() {
+        return formManage;
+    }
+
+    public void setFormManage(FormEvaluation formManage) {
+        this.formManage = formManage;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    public ManagerialCompetency getManage() {
+        return manage;
+    }
+
+    public void setManage(ManagerialCompetency manage) {
+        this.manage = manage;
+    }
+
 }

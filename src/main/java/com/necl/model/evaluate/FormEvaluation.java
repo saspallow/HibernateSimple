@@ -38,6 +38,10 @@ public class FormEvaluation implements Serializable {
     @OneToMany(mappedBy = "primaryKeyFunc.formFunc",
             cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<FuncForm> funcForms = new HashSet<FuncForm>();
+    
+    @OneToMany(mappedBy = "primaryKeyManage.formManage",
+            cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<MangeForm> manageForms = new HashSet<MangeForm>();
 
     public int getId() {
         return id;
@@ -86,5 +90,19 @@ public class FormEvaluation implements Serializable {
     public void addFuncForms(FuncForm funcForm) {
         this.funcForms.add(funcForm);
     }
+
+    public Set<MangeForm> getManageForms() {
+        return manageForms;
+    }
+
+    public void setManageForms(Set<MangeForm> manageForms) {
+        this.manageForms = manageForms;
+    }
+
+    public void addManageForms(MangeForm MangeForm) {
+        this.manageForms.add(MangeForm);
+    }
+    
+    
 
 }

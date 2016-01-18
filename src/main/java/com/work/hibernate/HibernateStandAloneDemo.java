@@ -6,6 +6,7 @@ import com.necl.model.evaluate.FormEvaluation;
 import com.necl.model.evaluate.FuncForm;
 import com.necl.model.evaluate.FunctionalCompetency;
 import com.necl.model.evaluate.ManagerialCompetency;
+import com.necl.model.evaluate.MangeForm;
 import com.work.dao.CoreDao;
 import com.work.dao.CoreFormDao;
 import com.work.dao.FormDao;
@@ -111,8 +112,44 @@ public class HibernateStandAloneDemo {
         funcForm3.setFunc(func3);
         funcForm3.setWeight(3);
         funcForm3.setSortOrder(3);
+//  Managerial
 
-        
+        ManagerialCompetency manage1 = ManageDao.findById(1);
+        ManagerialCompetency manage2 = ManageDao.findById(2);
+        ManagerialCompetency manage3 = ManageDao.findById(3);
+        ManagerialCompetency manage4 = ManageDao.findById(4);
+        ManagerialCompetency manage5 = ManageDao.findById(5);
+
+        MangeForm manageForm1 = new MangeForm();
+        MangeForm manageForm2 = new MangeForm();
+        MangeForm manageForm3 = new MangeForm();
+        MangeForm manageForm4 = new MangeForm();
+        MangeForm manageForm5 = new MangeForm();
+
+        manageForm1.setFormManage(form);
+        manageForm1.setManage(manage1);
+        manageForm1.setWeight(1);
+        manageForm1.setSortOrder(1);
+
+        manageForm2.setFormManage(form);
+        manageForm2.setManage(manage2);
+        manageForm2.setWeight(2);
+        manageForm2.setSortOrder(2);
+
+        manageForm3.setFormManage(form);
+        manageForm3.setManage(manage3);
+        manageForm3.setWeight(3);
+        manageForm3.setSortOrder(3);
+
+        manageForm4.setFormManage(form);
+        manageForm4.setManage(manage4);
+        manageForm4.setWeight(4);
+        manageForm4.setSortOrder(4);
+
+        manageForm5.setFormManage(form);
+        manageForm5.setManage(manage5);
+        manageForm5.setWeight(5);
+        manageForm5.setSortOrder(5);
 
         // Add Core to Form
         form.addCoreForms(coreForm1);
@@ -125,7 +162,14 @@ public class HibernateStandAloneDemo {
         form.addFuncForms(funcForm1);
         form.addFuncForms(funcForm2);
         form.addFuncForms(funcForm3);
-
+        
+        // Add Managerial to Form
+        form.addManageForms(manageForm1);
+        form.addManageForms(manageForm2);
+        form.addManageForms(manageForm3);
+        form.addManageForms(manageForm4);
+        form.addManageForms(manageForm5);
+        
 
         int id = FormDao.saveForm(form);
         FormEvaluation form1 = FormDao.findById(id);
@@ -139,9 +183,9 @@ public class HibernateStandAloneDemo {
 
         }
         System.out.println("===================================================");
-        
+
         System.out.println("\n\n==== ID :" + form1.getId() + " =========================================");
-        System.out.println("||                   Managerial Competency              ||");
+        System.out.println("||             Functional Competency             ||");
         System.out.println("===================================================");
         for (FuncForm ff : form1.getFuncForms()) {
             System.out.print("|| " + ff.getFunc().getDescription());
@@ -149,6 +193,15 @@ public class HibernateStandAloneDemo {
 
         }
         System.out.println("===================================================");
+        System.out.println("\n\n==== ID :" + form1.getId() + " =========================================");
+        System.out.println("||             Managerial Competency             ||");
+        System.out.println("===================================================");
+        for (MangeForm mf : form1.getManageForms()) {
+            System.out.print("|| " + mf.getManage().getDescription());
+            System.out.print(" Weight : [" + mf.getWeight() + "]\n");
+
+        }
+        
 //        CoreCompetency core = new CoreCompetency();
 //        core.setDescription("C1");
 //        
