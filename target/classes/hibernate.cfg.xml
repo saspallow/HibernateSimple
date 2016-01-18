@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+ 
+ 
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+        <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+        <property name="hibernate.connection.url">jdbc:sqlserver://172.16.58.106:1433;databaseName=HibernateSimple</property>
+        <property name="hibernate.connection.username">sa</property>
+        <property name="hibernate.connection.password">abc_123456</property>
+        <property name="connection.pool_size">1</property>
+        <property name="show_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+<!--        <mapping class="com.work.model.Student"/>
+        <mapping class="com.work.model.Skills"/>-->
+        <mapping class="com.necl.model.evaluate.CoreCompetency"/>
+        <mapping class="com.necl.model.evaluate.ManagerialCompetency"/>
+        <mapping class="com.necl.model.evaluate.FunctionalCompetency"/>
+        <mapping class="com.necl.model.evaluate.FormEvaluation"/>
+        
+        
+        <mapping class="com.necl.model.evaluate.CoreForm"/>
+        <mapping class="com.necl.model.evaluate.CoreFormId"/>
+        
+        <mapping class="com.necl.model.evaluate.FuncForm"/>
+        <mapping class="com.necl.model.evaluate.FuncFormId"/>
+        
+        <mapping class="com.necl.model.evaluate.MangeForm"/>
+        <mapping class="com.necl.model.evaluate.ManageFormId"/>
+        
+        
+        
+    </session-factory>
+</hibernate-configuration>
