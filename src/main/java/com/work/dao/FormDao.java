@@ -5,6 +5,7 @@
  */
 package com.work.dao;
 
+import com.necl.model.evaluate.EmployeeEvaluation;
 import com.necl.model.evaluate.FormEvaluation;
 import com.necl.model.evaluate.ManagerialCompetency;
 import com.work.hibernate.HibernateUtil;
@@ -38,6 +39,17 @@ public class FormDao {
         session.beginTransaction();
 
         session.update(formEvaluation);
+        session.getTransaction().commit();
+        session.close();
+        return true;
+    }
+    
+    public static boolean updateEmpEva(EmployeeEvaluation employeeEvaluation) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        session.update(employeeEvaluation);
         session.getTransaction().commit();
         session.close();
         return true;

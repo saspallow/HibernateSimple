@@ -2,14 +2,19 @@ package com.work.hibernate;
 
 import com.necl.model.evaluate.CoreCompetency;
 import com.necl.model.evaluate.CoreForm;
+import com.necl.model.evaluate.EmployeeEvaluation;
 import com.necl.model.evaluate.FormEvaluation;
 import com.necl.model.evaluate.FuncForm;
 import com.necl.model.evaluate.FunctionalCompetency;
 import com.necl.model.evaluate.ManagerialCompetency;
 import com.necl.model.evaluate.MangeForm;
+import com.necl.model.evaluate.ScoreCore;
+import com.necl.model.evaluate.ScoreFunc;
+import com.necl.model.evaluate.ScoreManage;
 import com.work.dao.CoreDao;
 import com.work.dao.CoreFormDao;
 import com.work.dao.FormDao;
+import com.work.dao.FormEvaluationDao;
 import com.work.dao.FunctionDao;
 import com.work.dao.ManageDao;
 import java.util.ArrayList;
@@ -162,26 +167,27 @@ public class HibernateStandAloneDemo {
         form.addFuncForms(funcForm1);
         form.addFuncForms(funcForm2);
         form.addFuncForms(funcForm3);
-        
+
         // Add Managerial to Form
         form.addManageForms(manageForm1);
         form.addManageForms(manageForm2);
         form.addManageForms(manageForm3);
         form.addManageForms(manageForm4);
         form.addManageForms(manageForm5);
-        
 
-        int id = FormDao.saveForm(form);
-        FormEvaluation form1 = FormDao.findById(id);
+//        int id = FormDao.saveForm(form);
+        FormEvaluation form1 = FormDao.findById(28);
 
         System.out.println("==== ID :" + form1.getId() + " =========================================");
         System.out.println("||                   Core Competency              ||");
         System.out.println("===================================================");
+        int num = 0;
         for (CoreForm cf : form1.getCoreForms()) {
+            num++;
             System.out.print("|| " + cf.getCore().getDescription());
             System.out.print(" Weight : [" + cf.getWeight() + "]\n");
-
         }
+
         System.out.println("===================================================");
 
         System.out.println("\n\n==== ID :" + form1.getId() + " =========================================");
@@ -201,11 +207,50 @@ public class HibernateStandAloneDemo {
             System.out.print(" Weight : [" + mf.getWeight() + "]\n");
 
         }
-        
-//        CoreCompetency core = new CoreCompetency();
-//        core.setDescription("C1");
-//        
-//        CoreDao.saveCore(core);
+
+        List<EmployeeEvaluation> eeeList = FormEvaluationDao.findByForm(form1.getId());
+
+        System.out.println("===================================================");
+        System.out.println("\n\n==== ID :" + form1.getId() + " =========================================");
+        System.out.println("||             Employee Evaluation             ||");
+        System.out.println("============================ TotalPerson : " + eeeList.size() + " ===");
+        for (EmployeeEvaluation eee : eeeList) {
+            System.out.println("\n===================================================");
+            System.out.println("|| Username : " + eee.getUser().getFirstName());
+            System.out.println(" ||  Score Core : " + eee.getScoreCore().size());
+            System.out.println(" ||  Manage Core : " + eee.getScoreManage().size());
+            System.out.println(" ||  Functional Core : " + eee.getScoreFunc().size());
+            System.out.println("================== Core =================================");
+            for (ScoreCore score : eee.getScoreCore()) {
+                
+                System.out.println("Description : " + score.getCoreCompetency().getDescription());
+                System.out.println("First score : " + score.getFirstScore());
+                System.out.println("Second score : " + score.getSecondScore());
+                System.out.println("Thrid score : " + score.getThridScore()+"\n");
+                score.setFirstScore(4);  
+            }
+            
+            System.out.println("================== Manage =================================");
+            for (ScoreManage score : eee.getScoreManage()) {
+                
+                System.out.println("Description : " + score.getManagerialCompetency().getDescription());
+                System.out.println("First score : " + score.getFirstScore());
+                System.out.println("Second score : " + score.getSecondScore());
+                System.out.println("Thrid score : " + score.getThridScore()+"\n");
+                score.setFirstScore(4);  
+            }
+            System.out.println("================== Functional =================================");
+            for (ScoreFunc score : eee.getScoreFunc()) {
+                
+                System.out.println("Description : " + score.getFunctionalCompetency().getDescription());
+                System.out.println("First score : " + score.getFirstScore());
+                System.out.println("Second score : " + score.getSecondScore());
+                System.out.println("Thrid score : " + score.getThridScore()+"\n");
+                score.setFirstScore(4);  
+            }
+            FormEvaluationDao.updateFormEva(eee);
+        }
+
     }
 
 }
