@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -34,8 +35,28 @@ public class User implements Serializable {
     @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
-    @Column(name = "EMAIL", nullable = false)
+    @Column(name = "EMAIL", unique = true, nullable = false)
     private String email;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "Division_ID")
+    private Division division;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "Section_ID")
+    private Section section;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "SubSection_ID")
+    private SubSection subSection;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "Position_ID")
+    private Position position;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "Branch_ID")
+    private Branch branch;
 
     @Column(name = "STATE", nullable = false)
     private String state = State.ACTIVE.getState();
@@ -110,6 +131,46 @@ public class User implements Serializable {
 
     public void setUserProfiles(Set<UserProfile> userProfiles) {
         this.userProfiles = userProfiles;
+    }
+
+    public Division getDivision() {
+        return division;
+    }
+
+    public void setDivision(Division division) {
+        this.division = division;
+    }
+
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
+
+    public SubSection getSubSection() {
+        return subSection;
+    }
+
+    public void setSubSection(SubSection subSection) {
+        this.subSection = subSection;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
 
     @Override

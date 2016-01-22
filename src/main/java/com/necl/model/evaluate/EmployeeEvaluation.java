@@ -35,6 +35,10 @@ public class EmployeeEvaluation implements Serializable {
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "Header_ID")
+    private HeaderAppraisal headerAppraisal;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "FORM_ID", nullable = false)
     private FormEvaluation formEvaluation;
 
@@ -43,12 +47,12 @@ public class EmployeeEvaluation implements Serializable {
     @JoinColumn(name = "EmpEvaID")
     @Fetch(FetchMode.SUBSELECT)
     private Set<ScoreCore> scoreCore = new HashSet<ScoreCore>();
-    
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "EmpEvaID")
     @Fetch(FetchMode.SUBSELECT)
     private Set<ScoreFunc> scoreFunc = new HashSet<ScoreFunc>();
-    
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "EmpEvaID")
     @Fetch(FetchMode.SUBSELECT)
@@ -120,7 +124,6 @@ public class EmployeeEvaluation implements Serializable {
         this.scoreManage = scoreManage;
     }
 
-    
     public int getFirstEvaluateId() {
         return firstEvaluateId;
     }
@@ -167,6 +170,14 @@ public class EmployeeEvaluation implements Serializable {
 
     public void setThridStatus(boolean thridStatus) {
         this.thridStatus = thridStatus;
+    }
+
+    public HeaderAppraisal getHeaderAppraisal() {
+        return headerAppraisal;
+    }
+
+    public void setHeaderAppraisal(HeaderAppraisal headerAppraisal) {
+        this.headerAppraisal = headerAppraisal;
     }
 
 }

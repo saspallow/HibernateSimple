@@ -76,6 +76,10 @@ public class FormEvaluation implements Serializable {
     @Fetch(FetchMode.SUBSELECT)
     private Set<MangeForm> manageForms = new HashSet<MangeForm>();
 
+    @OneToMany(mappedBy = "formEvaluation", fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<EmployeeEvaluation> employeeEvaluations = new ArrayList<EmployeeEvaluation>();
+
     public int getId() {
         return id;
     }
@@ -200,4 +204,11 @@ public class FormEvaluation implements Serializable {
         this.position = position;
     }
 
+    public List<EmployeeEvaluation> getEmployeeEvaluations() {
+        return employeeEvaluations;
+    }
+
+    public void setEmployeeEvaluations(List<EmployeeEvaluation> employeeEvaluations) {
+        this.employeeEvaluations = employeeEvaluations;
+    }
 }

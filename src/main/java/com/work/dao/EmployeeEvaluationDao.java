@@ -18,7 +18,7 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author C13.207
  */
-public class FormEvaluationDao {
+public class EmployeeEvaluationDao {
 
     public static int saveFormEva(EmployeeEvaluation employeeEvaluation) {
 

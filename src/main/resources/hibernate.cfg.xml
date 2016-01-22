@@ -28,7 +28,7 @@
         
         <mapping class="com.necl.model.evaluate.MangeForm"/>
         <mapping class="com.necl.model.evaluate.ManageFormId"/>
-        
+        <!-- 21/01/2016-->
         <mapping class="com.necl.model.evaluate.EmployeeEvaluation"/>
         <mapping class="com.necl.model.evaluate.ScoreCore"/>
         <mapping class="com.necl.model.evaluate.ScoreManage"/>
@@ -36,6 +36,18 @@
         <mapping class="com.necl.model.evaluate.User"/>
         <mapping class="com.necl.model.evaluate.UserProfile"/>
         <mapping class="com.necl.model.evaluate.UserProfileType"/>
+        
+        <mapping class="com.necl.model.evaluate.HeaderAppraisal"/>
+        <mapping class="com.necl.model.evaluate.EmployeeEvaluation"/>
+        
+        <mapping class="com.necl.model.evaluate.ConfigAppraisal"/>
+        <!-- 22/01/2016 -->
+        <mapping class="com.necl.model.evaluate.Division"/>
+        <mapping class="com.necl.model.evaluate.Section"/>
+        <mapping class="com.necl.model.evaluate.SubSection"/>
+        <mapping class="com.necl.model.evaluate.Position"/>
+        <mapping class="com.necl.model.evaluate.Branch"/>
+
       
         
         

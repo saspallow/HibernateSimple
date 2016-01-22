@@ -5,6 +5,7 @@
  */
 package com.work.dao;
 
+import com.necl.model.evaluate.ConfigAppraisal;
 import com.necl.model.evaluate.EmployeeEvaluation;
 import com.necl.model.evaluate.FormEvaluation;
 import com.necl.model.evaluate.ManagerialCompetency;
@@ -43,7 +44,7 @@ public class FormDao {
         session.close();
         return true;
     }
-    
+
     public static boolean updateEmpEva(EmployeeEvaluation employeeEvaluation) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -77,6 +78,20 @@ public class FormDao {
         crit.add(Restrictions.eq("id", id));
         crit.createAlias("coreForms", "c");
         crit.addOrder(Order.asc("c.sortOrder"));
+        return (FormEvaluation) crit.uniqueResult();
+    }
+
+    public static FormEvaluation generateInformation(ConfigAppraisal config) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Criteria crit = session.createCriteria(FormEvaluation.class);
+        crit.add(Restrictions.eq("division", config.getDivision()));
+        crit.add(Restrictions.eq("section", config.getSection()));
+        crit.add(Restrictions.eq("subSection", config.getSubSection()));
+        crit.add(Restrictions.eq("position", config.getPosition()));
+
         return (FormEvaluation) crit.uniqueResult();
     }
 
